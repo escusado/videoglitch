@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>App</title>
+  <link rel="icon" type="image/gif" href="/public/img/favicon.gif" />
+
+  <!-- Deps -->
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/phaser/build/phaser.js"></script>
+  <script src="/neon/neon.js"></script>
+  <script src="/neon/stdlib/custom_event.js"></script>
+  <script src="/neon/stdlib/custom_event_support.js"></script>
+  <script src="/neon/stdlib/node_support.js"></script>
+  <script src="/neon/stdlib/widget.js"></script>
+  <!-- bootstrap -->
+  <script src="/js/neon-bootstrap/NeBootstrapClient.js"></script>
+
+  <!-- App -->
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/app/App.js"></script>
+  <script src="/js/app/PhaserWrapper.js"></script>
+
+  <script>
+    //Config
+    window.neBootstrapClient = new NeBootstrapClient({
+        config : JSON.parse('{{client_config}}')
+    });
+
+    neBootstrapClient.setup();
+
+    if (document.readyState != 'loading'){
+        neBootstrapClient.start();
+    } else {
+        document.addEventListener('DOMContentLoaded', neBootstrapClient.start);
+    }
+
+    neBootstrapClient.bind('connected', function(ev){
+      window.app = new App({
+        socket : ev.data.socket,
+        config : ev.data.config
+      });
+      app.setup();
+      app.render(document.body);
+    });
+
+  </script>
+
+</head>
+
+<body>
+
+
+</body>
+
+</html>
