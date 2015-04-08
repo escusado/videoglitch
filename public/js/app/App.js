@@ -14,6 +14,16 @@ Class('App').inherits(Widget)({
         name : 'phaser'
       }));
 
+      this.videoEl = document.createElement('video');
+      this.element.appendChild(this.videoEl);
+
+      //start video stream
+      navigator.webkitGetUserMedia({audio: true, video: true}, function(stream) {
+        this.videoEl.src = window.URL.createObjectURL(stream);
+        this.videoEl.play();
+      }.bind(this), function(err){
+        console.log('error: ', err);
+      });
     },
 
     setup : function setup(){
