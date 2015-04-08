@@ -10,13 +10,6 @@ Class('App').inherits(Widget)({
     init : function(config){
       Widget.prototype.init.call(this, config);
 
-      this.appendChild(new PhaserWrapper({
-        name : 'phaser'
-      }));
-
-      this.videoEl = document.createElement('video');
-      this.element.appendChild(this.videoEl);
-
       //start video stream
       navigator.webkitGetUserMedia({audio: true, video: true}, function(stream) {
         this.videoEl.src = window.URL.createObjectURL(stream);
@@ -24,6 +17,14 @@ Class('App').inherits(Widget)({
       }.bind(this), function(err){
         console.log('error: ', err);
       });
+
+      this.appendChild(new PhaserWrapper({
+        name : 'phaser',
+        videoEl : this.videoEl
+      }));
+
+      this.videoEl = document.createElement('video');
+      this.element.appendChild(this.videoEl);
     },
 
     setup : function setup(){

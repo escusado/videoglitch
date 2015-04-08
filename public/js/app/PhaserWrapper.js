@@ -12,18 +12,22 @@ Class('PhaserWrapper').inherits(Widget)({
         create  : this.create.bind(this),
         update  : this.update.bind(this)
       });
+
     },
 
     preload : function preload(){
-      this.phaser.load.image('mypic', 'img/steven.png');
+      this.videoBitmap = this.phaser.add.bitmapData(window.innerWidth, window.innerHeight);
+      this.videoBitmap.context.drawImage(app.videoEl, 0, 0);
+      var videoSprite = this.phaser.add.sprite( window.innerWidth, window.innerHeight, this.videoBitmap );
+      // this.phaser.load.image('videoStream');
     },
 
     create : function create(){
-      this.phaser.add.sprite(0, 0, 'mypic');
+
     },
 
     update : function update(){
-
+      // console.log('>');
     }
   }
 });
