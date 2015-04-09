@@ -19,7 +19,6 @@ Class('PhaserWrapper').inherits(Widget)({
       this.videoBitmap = this.phaser.add.bitmapData(window.innerWidth, window.innerHeight);
       this.videoBitmap.context.drawImage(app.videoEl, 0, 0);
       var videoSprite = this.phaser.add.sprite( window.innerWidth, window.innerHeight, this.videoBitmap );
-      // this.phaser.load.image('videoStream');
     },
 
     create : function create(){
@@ -28,6 +27,8 @@ Class('PhaserWrapper').inherits(Widget)({
 
     update : function update(){
       // console.log('>');
+      // this.videoBitmap.context.drawImage(app.videoEl, 0, 0);
+      app.takePic();
     }
   }
 });

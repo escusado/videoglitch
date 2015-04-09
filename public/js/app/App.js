@@ -10,6 +10,13 @@ Class('App').inherits(Widget)({
     init : function(config){
       Widget.prototype.init.call(this, config);
 
+      this.appendChild(new Widget({
+        name : 'cameraCanvas',
+        element : document.createElement('canvas')
+      }));
+      this.element.appendChild(this.cameraCanvas.element);
+      this.context = this.cameraCanvas.element.getContext('2d');
+
       //start video stream
       navigator.webkitGetUserMedia({audio: true, video: true}, function(stream) {
         this.videoEl.src = window.URL.createObjectURL(stream);
@@ -38,6 +45,10 @@ Class('App').inherits(Widget)({
           clientId : this.config.clientId
         }
       });
+    },
+
+    takePic : function takePic(){
+      this.context.drawImage(this.videoEl, 0, 0, 200, 100);
     },
 
     _bindEvents : function _bindEvents(){
