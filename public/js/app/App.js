@@ -14,6 +14,7 @@ Class('App').inherits(Widget)({
         name : 'cameraCanvas',
         element : document.createElement('canvas')
       }));
+      this.cameraCanvas.element.classList.add('video-grab');
       this.element.appendChild(this.cameraCanvas.element);
       this.context = this.cameraCanvas.element.getContext('2d');
 
@@ -31,6 +32,7 @@ Class('App').inherits(Widget)({
       }));
 
       this.videoEl = document.createElement('video');
+      this.videoEl.classList.add('video-grab');
       this.element.appendChild(this.videoEl);
     },
 
